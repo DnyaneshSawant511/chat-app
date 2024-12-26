@@ -4,9 +4,9 @@ function App() {
 
   return (
     <>
-      hello
+      <p className='text-gray-600'>hello</p>
     </>
   )
 }
 
-export default App
+export default App;
