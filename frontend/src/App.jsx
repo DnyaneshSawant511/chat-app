@@ -7,12 +7,14 @@ import Login from './pages/Login.jsx';
 import Settings from './pages/Settings.jsx';
 import Profile from './pages/Profile.jsx';
 import { useAuthStore } from './store/useAuthStore.js';
+import { useThemeStore } from './store/useThemeStore.js';
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
 function App() {
 
   const { authUser, checkAuth, isCheckingAuth } =  useAuthStore();
+  const { theme } = useThemeStore();
 
   useEffect(() => {
     checkAuth();
@@ -27,7 +29,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div data-theme={theme}>
 
       <Navbar />
 
