@@ -14,7 +14,6 @@ const Sidebar = () => {
     }, [getUsers]);
 
     if (isUsersLoading) return <SidebarSkeleton />;
-    console.log(users);
 
     return (
         
