@@ -2,6 +2,7 @@ import cloudinary from "../lib/cloudinary.js";
 import { getReceiverSocketId, io } from "../lib/socket.js";
 import Message from "../models/message.model.js";
 import User from "../models/user.model.js";
+import axios from "axios";
 
 //controller to get a list of all users except for the current logged in user
 export const getUsersForSideBar = async (req, res) => {
@@ -69,11 +70,17 @@ export const sendMessage = async (req, res) => {
             imageUrl = uploadResponse.secure_url;
         }
 
+        const spamResponse = await axios.post("http://localhost:5000/predict", {
+            message: text,
+        });
+        const isSpam = spamResponse.data.isSpam;
+
         const newMessage = new Message({
             senderId,
             receiverId,
             text,
-            image: imageUrl
+            image: imageUrl,
+            isSpam
         });
 
         await newMessage.save();
